@@ -19,7 +19,7 @@ function stateReducer(state: State, action: CounterAction): State {
   return initialState
 }
 
-export default function PageToTest() {
+export default function Page() {
   const [state, dispatch] = useReducer(stateReducer, initialState);
   const addFive = () => 
     dispatch({ type: "setCount", value: state.count + 5 })
