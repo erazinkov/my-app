@@ -1,19 +1,34 @@
 'use client'
 
+import React, { Dispatch, SetStateAction } from "react"
 import { createContext, useContext, useState } from "react"
+
+
+interface ThemeInterface {
+    background: string,
+    color: string,
+}
 
 export const themes = {
     light: {
-        foreground: '#000000',
         background: '#eeeeee',
+        color: '#222222',
     },
     dark: {
-        foreground: '#ffffff',
         background: '#222222',
+        color: '#eeeeee',
     },
 }
 
-export const ThemeContext = createContext({})
+interface ThemeContext {
+    theme: ThemeInterface,
+    setTheme: Dispatch<SetStateAction<ThemeInterface>>
+}
+
+export const ThemeContext = createContext<ThemeContext>({
+    theme: themes.light,
+    setTheme: () => {}
+})
 
 export const useTheme = () => useContext(ThemeContext)
 
