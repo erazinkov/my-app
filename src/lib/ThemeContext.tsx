@@ -1,32 +1,20 @@
 'use client'
 
-import React, { Dispatch, SetStateAction } from "react"
+import React, { Dispatch, SetStateAction, useEffect } from "react"
 import { createContext, useContext, useState } from "react"
 
 
-interface ThemeInterface {
-    background: string,
-    color: string,
-}
+type Theme = 
+    | { type: "light" }
+    | { type: "dark" }
 
-export const themes = {
-    light: {
-        background: '#eeeeee',
-        color: '#222222',
-    },
-    dark: {
-        background: '#222222',
-        color: '#eeeeee',
-    },
-}
-
-interface ThemeContext {
-    theme: ThemeInterface,
-    setTheme: Dispatch<SetStateAction<ThemeInterface>>
+export interface ThemeContext {
+    theme: Theme,
+    setTheme: Dispatch<SetStateAction<Theme>>
 }
 
 export const ThemeContext = createContext<ThemeContext>({
-    theme: themes.light,
+    theme: { type: "light"},
     setTheme: () => {}
 })
 
@@ -37,7 +25,10 @@ export default function ThemeProvider({
 } : {
     children: React.ReactNode
 }) {
-    const [theme, setTheme] = useState(themes.dark)
+    const [theme, setTheme] = useState<Theme>({ type: "light" })
+    useEffect(() => {
+        document.documentElement.dataset.theme = theme.type
+      }, [ theme ])
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
     )
