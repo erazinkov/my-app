@@ -1,8 +1,8 @@
-import ThemeProvider from '@/lib/ThemeContext'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Sidebar from '@/components/SIdebar/Sidebar'
+import ThemeProvider from '@/lib/ThemeContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
