@@ -6,9 +6,9 @@ export default function Sidebar() {
     const { theme, setTheme } = useTheme()
 
     const toggleTheme = () => {
-        const themeCurrent = theme.type === "light" ? "light" : "dark"
+        const themeCurrent = theme === "light" ? "light" : "dark"
         console.log(themeCurrent)
-        setTheme(theme.type === "light" ? { type: "dark" } : { type: "light" })
+        setTheme(theme === "light" ?  "dark"  : "light" )
     }
     return (
         <div className="flex flex-col gap-3 align-center justify-center">

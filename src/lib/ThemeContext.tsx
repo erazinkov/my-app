@@ -5,8 +5,8 @@ import { createContext, useContext, useState } from "react"
 
 
 type Theme = 
-    | { type: "light" }
-    | { type: "dark" }
+    | "light" 
+    | "dark"
 
 export interface ThemeContext {
     theme: Theme,
@@ -14,7 +14,7 @@ export interface ThemeContext {
 }
 
 export const ThemeContext = createContext<ThemeContext>({
-    theme: { type: "light"},
+    theme: "light",
     setTheme: () => {}
 })
 
@@ -25,9 +25,9 @@ export default function ThemeProvider({
 } : {
     children: React.ReactNode
 }) {
-    const [theme, setTheme] = useState<Theme>({ type: "light" })
+    const [theme, setTheme] = useState<Theme>("light")
     useEffect(() => {
-        document.documentElement.dataset.theme = theme.type
+        document.documentElement.dataset.theme = theme
       }, [ theme ])
     return (
         <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
