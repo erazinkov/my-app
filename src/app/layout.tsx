@@ -2,6 +2,7 @@ import ThemeProvider from '@/lib/ThemeContext'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Sidebar from '@/components/SIdebar/Sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <body className={inter.className}>{children}</body>
+        <body className="min-h-screen flex gap-3">
+          <div>
+            <Sidebar/>
+          </div>
+          <main className='flex-1'>
+            {children}
+          </main>
+        </body>
       </ThemeProvider>
     </html>
   )
