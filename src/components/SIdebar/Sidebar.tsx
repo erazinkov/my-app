@@ -1,6 +1,11 @@
 'use client'
 
+import Image from 'next/legacy/image'
+import Logo from '@/../public/logo.svg'
+import LightTheme from '@/../public/light_mode.svg'
+import DarkTheme from '@/../public/dark_mode.svg'
 import { useTheme } from "@/lib/ThemeContext"
+import cx from 'classnames'
 
 export default function Sidebar() {
     const { theme, setTheme } = useTheme()
@@ -10,9 +15,30 @@ export default function Sidebar() {
         console.log(themeCurrent)
         setTheme(theme === "light" ?  "dark"  : "light" )
     }
+
+    const classNames = cx(
+        "min-h-screen flex flex-col gap-3 align-center justify-between p-3",
+        theme === 'light' ? 'bg-[color:var(--light-sidebar)]' : 'bg-[color:var(--dark-sidebar)]'
+    )
+
     return (
-        <div className="flex flex-col gap-3 align-center justify-center">
-            <button className='rounded-full p-3 border-4' onClick={toggleTheme}>Toggle theme</button>
+        <div className={classNames}>
+            <Image 
+                src={Logo}
+                alt='Logo'
+            />
+            <button className='rounded-full border-none' onClick={toggleTheme}>
+                {theme === 'light' ?
+                <Image
+                    src={DarkTheme}
+                    alt='ThemeDark'
+                /> :
+                <Image
+                    src={LightTheme}
+                    alt='ThemeLight'
+                />
+            }
+            </button>
         </div>
     )
 }

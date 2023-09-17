@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider>
-        <body className="min-h-screen flex gap-3">
+        <body className="min-h-screen flex">
           <div>
             <Sidebar/>
           </div>
