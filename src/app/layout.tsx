@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import Sidebar from '@/components/SIdebar/Sidebar'
+import Sidebar from '@/components/Sidebar/Sidebar'
 import ThemeProvider from '@/lib/ThemeContext'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider>
+        <ThemeProvider>
         <body className="min-h-screen flex">
           <div>
             <Sidebar/>
@@ -27,7 +27,7 @@ export default function RootLayout({
             {children}
           </main>
         </body>
-      </ThemeProvider>
+</ThemeProvider>
     </html>
   )
 }
