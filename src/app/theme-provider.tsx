@@ -1,7 +1,13 @@
-import { ThemeContext, themes } from "@/contexts/ThemeContext";
-import { useEffect, useState } from "react";
+'use client'
 
-const getTheme = () => {
+import { createContext, useEffect, useState } from "react"
+
+export const themes = {
+    dark: "light" ,
+    light: "dark"
+}
+
+function getTheme() {
     if (typeof window !== "undefined") {
         const theme = `${window?.localStorage?.getItem('theme')}`
         if (Object.values(themes).includes(theme)) return theme
@@ -11,21 +17,15 @@ const getTheme = () => {
     return themes.dark
 }
 
-const ThemeProvider = ({ 
-    children 
-}:  {
-    children: React.ReactNode
- }) => {
+export const ThemeContext = createContext({})
+
+export default function  ThemeProvider({ children } : {children: React.ReactNode}) {
     const [theme, setTheme] = useState(getTheme)
     useEffect(() => {
         document.documentElement.dataset.theme = theme
         localStorage.setItem('theme', theme)
       }, [ theme ])
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-            {children}
-        </ThemeContext.Provider>
+        <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
     )
- }
-
- export default ThemeProvider
+}
